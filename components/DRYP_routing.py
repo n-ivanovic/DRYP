@@ -1,9 +1,15 @@
-import os
 import numpy as np
 from landlab.components import LossyFlowAccumulator
-#import pyximport; pyximport.install()
-#from components.TransLoss import TransLossWVc # for windows
-#from TransLoss import TransLossWVc # for linux
+# import pyximport; pyximport.install()
+# from components.TransLoss import TransLossWVc # for windows
+# from TransLoss import TransLossWVc # for linux
+
+# ADDITIONAL MODULES
+from timing import timer
+from termcolor import colored
+import pdb
+import matplotlib.pyplot as plt
+# ADDITIONAL MODULES
 
 river = None
 qini = None
@@ -42,7 +48,7 @@ class runoff_routing(object):
 		env_state.grid.at_node['base_flow_streams'] = env_state.grid.at_node['SS_loss']*dhriv/(1.0*dt) #[m/dt]		
 		pass		
 
-	def run_runoff_one_step(self, inf, swb, aof, env_state, data_in):				
+	def run_runoff_one_step(self, inf, swb, aof, env_state, data_in):
 		# dis_dt:	Discharge [mm]
 		# exs_dt:	Infiltration excess [mm]
 		# tls_dt	Transmission losses [mm]
@@ -54,14 +60,14 @@ class runoff_routing(object):
 		
 		env_state.grid.at_node['runoff'][act_nodes] = (inf.exs_dt[act_nodes]*0.001
 										* env_state.cth_area[act_nodes]
-										+ (env_state.SZgrid.at_node['discharge'][act_nodes])
-										)
+										+ (env_state.SZgrid.at_node['discharge'][act_nodes]))
 		check_dry_conditions = len(np.where((env_state.grid.at_node['runoff'][act_nodes]
-					+ env_state.grid.at_node['Q_ini'][act_nodes]
-					) > 0.0)[0])
+					+ env_state.grid.at_node['Q_ini'][act_nodes]) > 0.0)[0])
 		
 		if check_dry_conditions > 0:
-			self.fa.accumulate_flow(update_flow_director = env_state.act_update_flow_director)
+			with timer('Accumulate flow...'):
+				self.fa.accumulate_flow(update_flow_director = env_state.act_update_flow_director)		# This one here needs a bit time to compute
+				print(colored(' ✔ Done!', 'green'))
 			self.dis_dt[act_nodes] = np.array(
 					env_state.grid.at_node["surface_water__discharge"][act_nodes])
 			if self.carea is None:
@@ -94,7 +100,8 @@ def Create_parameter_WV(grid,Kloss):
 	return
 
 # Transmission losses function
-def TransLossWV(Qw, nodeID, linkID, grid): 
+def TransLossWV(Qw, nodeID, linkID, grid):
+	
 	Qout = Qw	
 	if grid.at_node['river'][nodeID] != 0:		
 		Qin = (Qw+grid.at_node['Q_ini'][nodeID])
@@ -109,8 +116,7 @@ def TransLossWV(Qw, nodeID, linkID, grid):
 		if Qin > 0.0:		
 			if grid.at_node['riv_sat_deficit'][nodeID] <= 0.0:		
 				Qout, Qo = exp_decay_wp(Qin,
-						grid.at_node['decay_flow'][nodeID]
-						)
+						grid.at_node['decay_flow'][nodeID])
 
 				TL = 0				
 			else:		
@@ -164,8 +170,7 @@ def TransLossWV1(Qw, nodeID, linkID, grid):
 		if Qin > 0.0:		
 			if rsd[nodeID] <= 0.0:		
 				Qout, Qo = exp_decay_wp(Qin,
-						decay[nodeID]
-						)
+						decay[nodeID])
 
 				TL = 0				
 			else:		
@@ -343,7 +348,7 @@ def velocity(L,W,Ss,So):
 	# W:	Channel width	
 	B = -0.0543 * np.log10(So)	
 	C = 2*Ss/(L*W)+W	
-	v = 1.564*np.power(R,B)*np.power(Ss,0.573)/(np.power(L,0.573)*np.power(C,0.40))	
+	v = 1.564*np.power(R,B)*np.power(Ss,0.573)/(np.power(L,0.573)*np.power(C,0.40))	# R is not defined
 	return v
 	
 # Hydraulic radio

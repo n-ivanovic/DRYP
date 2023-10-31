@@ -7,8 +7,8 @@ Not available Aquifer Specific yield: Sy = 0.01
 Not available aquifer bottom elevation: zb = 0.0 m
 Not available aquifer SZ_Ksat (Ks_gw = 0.1 [m/dt])
 Not available constant head boundary conditions
-Not available channel Ksat: Ksat_ch = 1.0 [mm/h])
-Not available soil moisture: theta = 1.01*wp [-])
+Not available channel Ksat: (Ksat_ch = 1.0 [mm/h])
+Not available soil moisture: (theta = 1.01*wp [-])
 ******* Output Directory *******
 Directory  ../GW_1D/outputs  already exists
 Directory  ../GW_1D/outputs/TimeFrames  already exists

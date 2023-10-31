@@ -5,6 +5,7 @@ import numpy as np
 import pandas as pd
 from landlab import RasterModelGrid
 from landlab.io import read_esri_ascii, write_esri_ascii
+from landlab.io.netcdf import read_netcdf, write_netcdf
 from datetime import timedelta, datetime
 from netCDF4 import Dataset, num2date, date2num
 from landlab.components import FlowDirectorSteepest, FlowAccumulator
@@ -19,6 +20,7 @@ class inputfile(object):
 		"""
 		self.first_read = first_read
 		# =================================================================
+		# print(os.getcwd())
 		f = pd.read_csv(filename_inputs)
 		self.Mname = f.drylandmodel[1]
 		# Surface components ======================================== SZ = 
@@ -557,10 +559,7 @@ class model_environment_status(object):
 		
 	# Create directories for saving results	
 	def set_output_dir(self, inputfile):
-		"""
-		Directory *DirOutput* Created
-		Directory *outputcirnetcdf* already exists
-		"""
+
 		print('******* Output Directory *******')
 		if not os.path.exists(inputfile.DirOutput):
 			os.mkdir(inputfile.DirOutput)
@@ -619,31 +618,31 @@ class model_environment_status(object):
 			gaugeidGW.append(self.grid.find_nearest_node([fGW['East'][nGW], fGW['North'][nGW]]))
 			GW_label.append('SZ_'+str(nGW))
 		
-		ncell_a = np.int(700/self.grid.dx)+1 # number of cells around station
+		# ncell_a = np.int(700/self.grid.dx)+1 # number of cells around station
 		
-		# Finding core cells, river cells and basin cells
-		act_nodes = self.grid.core_nodes # Nodes inside the model domain
+		# # Finding core cells, river cells and basin cells
+		# act_nodes = self.grid.core_nodes # Nodes inside the model domain
 		
-		if inputfile.first_read == 1:
+		# if inputfile.first_read == 1:
 		
-			#create a range of cell for cosmos probe			
-			cosmos_ids = []			
-			cosmos_ids_core = []
+		# 	#create a range of cell for cosmos probe			
+		# 	cosmos_ids = []			
+		# 	cosmos_ids_core = []
 			
-			if ncell_a == 0:				
-				cosmos_ids_core = np.where(self.grid.core_nodes == gaugeidUZ[0])[0]				
-				cosmos_ids_core = cosmos_ids_core.astype(int)				
-				cosmos_ids = gaugeidUZ[0].astype(int)			
-			else:				
-				for cos_id in range(gaugeidUZ[0]-ncell_a*self.grid.shape[1], gaugeidUZ[0]+ncell_a*self.grid.shape[1],self.grid.shape[1]):				
-					for x in range(cos_id-ncell_a, cos_id+ncell_a):					
-						cosmos_ids.append(x)
+		# 	if ncell_a == 0:				
+		# 		cosmos_ids_core = np.where(self.grid.core_nodes == gaugeidUZ[0])[0]				
+		# 		cosmos_ids_core = cosmos_ids_core.astype(int)				
+		# 		cosmos_ids = gaugeidUZ[0].astype(int)			
+		# 	else:				
+		# 		for cos_id in range(gaugeidUZ[0]-ncell_a*self.grid.shape[1], gaugeidUZ[0]+ncell_a*self.grid.shape[1],self.grid.shape[1]):				
+		# 			for x in range(cos_id-ncell_a, cos_id+ncell_a):					
+		# 				cosmos_ids.append(x)
 					
-				self.cosmos_ids_core_mask = np.isin(act_nodes, cosmos_ids)							
-				self.cosmos_ids = act_nodes[self.cosmos_ids_core_mask]
-				cosmos_ids_core_aux = np.array(range(len(act_nodes)))				
-				self.cosmos_ids_core_mask[self.cosmos_ids_core_mask == True] = 1				
-				self.cosmos_ids_core = np.where(self.cosmos_ids_core_mask == 1)[0]
+		# 		self.cosmos_ids_core_mask = np.isin(act_nodes, cosmos_ids)							
+		# 		self.cosmos_ids = act_nodes[self.cosmos_ids_core_mask]
+		# 		cosmos_ids_core_aux = np.array(range(len(act_nodes)))				
+		# 		self.cosmos_ids_core_mask[self.cosmos_ids_core_mask == True] = 1				
+		# 		self.cosmos_ids_core = np.where(self.cosmos_ids_core_mask == 1)[0]
 			
 		gaugeidUZ_act = []
 		

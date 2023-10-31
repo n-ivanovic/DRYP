@@ -6,6 +6,9 @@ import datetime
 from datetime import timedelta
 from netCDF4 import Dataset, num2date, date2num
 from landlab.io import write_esri_ascii
+from landlab.io.netcdf import write_netcdf
+from landlab.plot.imshow import imshow_grid
+import matplotlib.pyplot as plt
 
 class GlobalTimeVarPts:
 

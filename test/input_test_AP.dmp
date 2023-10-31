@@ -3,17 +3,17 @@ Model name --------------------------------------(1):
 test
 ================ TERRAIN COMPONENTS ================= 
 Topography (DEM)---------------------------------(4):
-test/input/test_dem_m.asc
+/home/ivanovn/ws_local/temp/DRYP_input/resampled_merged_dem.asc
 Cell factor area --------------------------------(6):
-test/input/test_area_m.asc
+/home/ivanovn/ws_local/temp/DRYP_input/cell_factor_area.asc
 Flow Direction (fd)------------------------------(8):
-test/input/test_flowdir_m.asc
+/home/ivanovn/ws_local/temp/DRYP_input/flow_direction.asc
 Boundary conditions (check CHB) ----------------(10):
-test/input/test_chb.asc
+/home/ivanovn/ws_local/temp/DRYP_input/chb.asc
 Basin Mask (catchment) -------------------------(12):
-test/input/test_mask_m.asc
+/home/ivanovn/ws_local/temp/DRYP_input/terrain_mask.asc
 River length -----------------------------------(14):
-test/input/test_riv_m.asc
+/home/ivanovn/ws_local/temp/DRYP_input/river_lengths.asc
 River width ------------------------------------(16):
 none
 River bottom elevation -------------------------(18):
@@ -27,58 +27,58 @@ Other ------------------------------------------(25):
 none
 =========== SOIL AND SUBSURFACE PARAMETERS ========== 
 Soil porosity: porosity ------------------------(28):
-test/input/test_rawls_ne.txt
+/home/ivanovn/ws_local/temp/DRYP_input/resampled_wc_sat.asc
 Theta residual ---------------------------------(30):
-test/input/test_rawls_theta_r.txt
+/home/ivanovn/ws_local/temp/DRYP_input/resampled_wc_res.asc
 Available Water content (AWC) ------------------(32):
-test/input/test_rawls_awc.txt
+/home/ivanovn/ws_local/temp/DRYP_input/resampled_wc_avail.asc
 Wilting Point (wp) -----------------------------(34):
-test/input/test_rawls_wp.txt
+/home/ivanovn/ws_local/temp/DRYP_input/resampled_crit_wilt.asc
 Soil Depth (D) ---------------------------------(36):
-test/input/test_depth_m.asc
+/home/ivanovn/ws_local/temp/DRYP_input/resampled_soil_depth.asc
 Soi particle distribution parameter (b) --------(38):
-test/input/test_rawls_n.txt
+/home/ivanovn/ws_local/temp/DRYP_input/parameter_b.asc
 Soil suction head ------------------------------(40):
-test/input/test_rawls_phi.txt
+/home/ivanovn/ws_local/temp/DRYP_input/parameter_psi.asc
 Saturated hydraulic conductivity ---------------(42):
-test/input/test_rawls_ks.txt
+/home/ivanovn/ws_local/temp/DRYP_input/resampled_ksat.asc
 sigma_Ksat -------------------------------------(44):
-test/input/test_rawls_sigma_ks.txt
+/home/ivanovn/ws_local/temp/DRYP_input/sigma_ksat.asc
 Initial soil water content ---------------------(46):
 none
 Other ------------------------------------------(48):
 none
 === GROUNDWATER PARAMETER AND BOUNDARY CONDITIONS ===
 Groundwater Boundary condition (domain) --------(51):
-test/input/test_mask_m.asc
+tes/home/ivanovn/ws_local/temp/DRYP_input/terrain_mask.asc
 Aquifer Sat. Hydraulic Conductivity (Ksat_aq) --(53):
-test/input/test_rawls_ks1.txt
+/home/ivanovn/ws_local/temp/DRYP_input/ksat_aq.asc
 Specific Yield----------------------------------(55):
 none
 Initial Conditions Water table elevation -------(57):
-test/input/test_wte_ini.asc
+/home/ivanovn/ws_local/temp/DRYP_input/wte.asc
 Flux Boundary Conditions -----------------------(59):
 none
 Head Boundary Conditions -----------------------(61):
-test/input/test_CHB1.asc
+/home/ivanovn/ws_local/temp/DRYP_input/chb.asc
 Other-------------------------------------------(63):
 none
 ============== METEOROLOGICAL DATA ==================
 Precipitation ----------------------------------(66):
-test/input/Pre_60m_00_05_sin.csv
+/home/ivanovn/ws_local/temp/DRYP_input/Pre_60m_00_05_sin.csv
 Potential Evapotranspiration -------------------(68):
-test/input/Pre_60m_00_05_sin.csv
+/home/ivanovn/ws_local/temp/DRYP_input/Pre_60m_00_05_sin.csv
 Water abstractions file ------------------------(70):
 none
 Other ------------------------------------------(72):
 none
 ======== RESULTS AND OUTPUT DIRECTORIES ============= 
 Discharge point results ------------------------(75):
-test/input/test_Flumes_points.csv
+/home/ivanovn/ws_local/temp/DRYP_input/test_Flumes_points.csv
 Soil point results output ----------------------(77):
-test/input/test_SM_points.csv
+/home/ivanovn/ws_local/temp/DRYP_input/test_SM_points.csv
 Groundwater point results ----------------------(79):
-test/input/test_well_point_m.csv
+/home/ivanovn/ws_local/temp/DRYP_input/test_well_point_m.csv
 Folder location results ------------------------(81):
 test/output
 Other ------------------------------------------(83):
@@ -86,4 +86,4 @@ none
 Other ------------------------------------------(85):
 none
 MODEL PARAMETER SETTINGS FILE ------------------(87):
-test/setting_test.dmp
+test/setting_test_AP.dmp
