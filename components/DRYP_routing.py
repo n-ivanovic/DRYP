@@ -7,8 +7,6 @@ from landlab.components import LossyFlowAccumulator
 # ADDITIONAL MODULES
 from timing import timer
 from termcolor import colored
-import pdb
-import matplotlib.pyplot as plt
 # ADDITIONAL MODULES
 
 river = None
