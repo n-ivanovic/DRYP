@@ -65,9 +65,9 @@ Other-------------------------------------------(63):
 none
 ============== METEOROLOGICAL DATA ==================
 Precipitation ----------------------------------(66):
-/home/ivanovn/ws_local/temp/DRYP_input/Pre_60m_00_05_sin.csv
+/home/ivanovn/ws_local/temp/DRYP_input/Pre_60m_00_05_sin_DRYP1.csv
 Potential Evapotranspiration -------------------(68):
-/home/ivanovn/ws_local/temp/DRYP_input/Pre_60m_00_05_sin.csv
+/home/ivanovn/ws_local/temp/DRYP_input/Pre_60m_00_05_sin_DRYP1.csv
 Water abstractions file ------------------------(70):
 none
 Other ------------------------------------------(72):
